@@ -3,18 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
-
-
-
 class sõnaValija {
+    private static final String FILE_PATH = "/Users/user/Koolivärk/Teine semester/Objektorienteeritud programmeerimine/backupWordle/src/sõnad"; //failitee
+    public String[] valiSõna() {
+        String[][] sõnadJaTähendused = new String[100][0];
+        String[] sõnaJaTähendus = new String[2];
+        int i = 0; //ridade arv failis, random jaoks vajalik
 
-    public static void main(String[] args) {
-        String[][] sõnadJaTähendused = new String[5][2];
-
-        try {
-            File f = new File("/Users/user/Koolivärk/Teine semester/Objektorienteeritud programmeerimine/backupWordle/src/sõnad");
-            Scanner myReader = new Scanner(f);
-            int i = 0; //indeks
+        try (Scanner myReader = new Scanner(new File(FILE_PATH))) {
             while (myReader.hasNextLine()) {
                 sõnadJaTähendused[i] = myReader.nextLine().split(";");
                 i++;
@@ -25,13 +21,9 @@ class sõnaValija {
             e.printStackTrace();
         }
         Random random = new Random();
-        int randomNumber = random.nextInt(5);
-        String valitudSõna = sõnadJaTähendused[randomNumber][0];
-        String valitudSõnaTähendus = sõnadJaTähendused[randomNumber][1];
-
-        System.out.println(valitudSõna);
-        System.out.println(valitudSõnaTähendus);
-
-
-    } // main
-}//sõnaValija
+        int randomNumber = random.nextInt(i);
+        sõnaJaTähendus[0] = sõnadJaTähendused[randomNumber][0];
+        sõnaJaTähendus[1] = sõnadJaTähendused[randomNumber][1];
+        return sõnaJaTähendus;
+    } //sõnaValija
+}//class
