@@ -6,7 +6,12 @@ public class Wordle {
         // ALGVÄÄRTUSTUSED
         int guessCounter = 1;
         boolean äraArvatud = false;
-        String sõna = "moonisai"; // 8 characteri
+        sõnaValija sõnaValija = new sõnaValija();
+        String[] sõnapaar = sõnaValija.valiSõna();
+
+        String tähendus = sõnapaar[1];
+        String sõna = sõnapaar[0];
+        //String sõna = "moonisai"; // 8 characteri, jätan alles veel testimiseks
 
         // SCANNERI KLASS
         Scanner sk = new Scanner(System.in);
@@ -41,7 +46,7 @@ public class Wordle {
                 arvajaSõna = sk.nextLine();
 
                 if (arvajaSõna.equals(sõna)) { // KASUTAJA ARVAB SÕNA ÄRA
-                    System.out.println("Arvasid sõna " + "'" + sõna + "'" + " ära " + guessCounter + ". korraga.");
+                    System.out.println("Arvasid sõna " + "'" + sõna + "'" + " ära " + guessCounter + ". korraga. Sõna " + sõna + " tähendus on: " + tähendus);
                     äraArvatud = true;
                 } else {
                     misOnÕigedTähed.setPakutudSõna(arvajaSõna); // UUENDAB SINU GUESSI
