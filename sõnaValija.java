@@ -3,8 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
-class sõnaValija {
-    private static final String FILE_PATH = "/Users/user/Koolivärk/Teine semester/Objektorienteeritud programmeerimine/backupWordle/src/sõnad"; //failitee
+public class sõnaValija {
+    private static final String FILE_PATH = "sõnad.txt"; //failitee
     public String[] valiSõna() {
         String[][] sõnadJaTähendused = new String[100][0];
         String[] sõnaJaTähendus = new String[2];
@@ -27,3 +27,4 @@ class sõnaValija {
         return sõnaJaTähendus;
     } //sõnaValija
 }//class
+
