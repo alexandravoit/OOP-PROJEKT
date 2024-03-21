@@ -12,18 +12,51 @@ public class Wordle {
         String otsitavSõna = sõnaJaTähendus[0];
         String otsitavaSõnaTähendus = sõnaJaTähendus[1];
         int mituTähteSõnas = otsitavSõna.length();
+        int elud = 0;
+        String raskusaste = "0";
 
-        // TEATAB MITU TÄHTE ARVATAVAS SÕNAS ON
-        System.out.println("Sõnas on " + mituTähteSõnas + " tähte.");
+        String ANSI_RED = "\u001B[31m";
 
         // SCANNERI KLASS
         Scanner sk = new Scanner(System.in);
 
+        while ((!raskusaste.equals("1")) && (!raskusaste.equals("2")) && (!raskusaste.equals("3"))) {
+            System.out.print("Vali mängu raskusaste!\n(1) -> Lihtne (lõputult pakkumisi)\n(2) -> Keskmine (10 pakkumist)\n(3) -> Klassikaline (6 pakkumist)\n");
+            System.out.print("\u001B[31m" + "Sisesta 1 või 2 või 3." + "\u001B[0m\n--> ");
+            raskusaste = sk.nextLine();
+
+            if (raskusaste.equals("1"))
+                elud = Integer.MAX_VALUE;
+            else if (raskusaste.equals("2"))
+                elud = 10;
+            else if (raskusaste.equals("3"))
+                elud = 6;
+        }
+
+        System.out.print("Mäng algab");
+        for (int i = 0; i < 3; i++) { //Laadimine tekitab põnevust :)
+            System.out.print(".");
+            try {
+                Thread.sleep(666);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        System.out.println();
+
+        //TEATAB MITU TÄHTE ARVATAVAS SÕNAS ON
+        System.out.println("Sõnas on " + mituTähteSõnas + " tähte.");
 
         // ESIMENE PAKKUMINE LOOPIST VÄLJAS
-        System.out.print("Sinu " + guessCounter + ". pakkumine: ");
-        String arvajaSõna = sk.nextLine().toLowerCase();
-        guessCounter ++;
+        String arvajaSõna = "";
+        while (arvajaSõna.length() != 6) {
+
+            System.out.print("Sinu " + guessCounter + ". pakkumine: ");
+            arvajaSõna = sk.nextLine().toLowerCase();
+            if (arvajaSõna.length() != 6)
+                System.out.println("Paku ainult 6-tähelisi sõnu!");
+        }
+        guessCounter++;
 
 
         // LUUAKSE KLASS
@@ -47,9 +80,13 @@ public class Wordle {
 
 
             // SENI KUNI KASUTAJA POLE SÕNA ÄRA ARVANUD
-            while (!äraArvatud) {
+            while (!äraArvatud && elud > 0) {
                 System.out.print("Sinu " + guessCounter + ". pakkumine: ");
                 arvajaSõna = sk.nextLine().toLowerCase();
+                if (arvajaSõna.length() != 6) {
+                    System.out.println("Paku ainult 6-tähelisi sõnu!");
+                    continue;
+                }
 
                 if (arvajaSõna.equals(otsitavSõna)) { // KASUTAJA ARVAB SÕNA ÄRA
                     System.out.println("Arvasid sõna " + "'" + otsitavSõna + "'" + " ära " + guessCounter + ". korraga.");
@@ -61,26 +98,16 @@ public class Wordle {
                     misOnÕigedTähed.väljastaOlukord();
                     väljastaMänguSeis(misOnÕigedTähed);
                     System.out.println();
-
                     guessCounter ++;
 
+                    if (guessCounter > elud) {
+                        System.out.println("Kaotasid :( Otsitav sõna oli " + otsitavSõna + ", mis tähendab '" + otsitavaSõnaTähendus + "'");
+                        break; //Elud on otsas, mäng on läbi, väljume tsüklist.
 
+                    }
                 }
-
             }
-
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public static void väljastaMänguSeis(ÕigedTähed sõna) {
