@@ -43,7 +43,7 @@ public class ÕigedTähed {
         for (char täht : vastuseMassiiv) {
             if (valesKohas.contains(täht)) valesKohas.remove(Character.valueOf(täht));
         }
-        
+
     }
 
     public void väljastaOlukord() {
