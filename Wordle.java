@@ -7,7 +7,7 @@ public class Wordle {
         int guessCounter = 1;
         boolean äraArvatud = false;
 
-        sõnaValija sõnaValija = new sõnaValija(); // sõnaValija klass, et valida suvaline sõna
+        SõnaValija sõnaValija = new SõnaValija(); // sõnaValija klass, et valida suvaline sõna
         String[] sõnaJaTähendus = sõnaValija.valiSõna(); // String[] sõnast ja selle tähendusest
         String otsitavSõna = sõnaJaTähendus[0];
         String otsitavaSõnaTähendus = sõnaJaTähendus[1];
