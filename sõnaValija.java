@@ -1,9 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
-public class sõnaValija {
+public class SõnaValija {
     private static final String FILE_PATH = "sõnad.txt"; //failitee
     public String[] valiSõna() {
         String[][] sõnadJaTähendused = new String[100][0];
@@ -27,4 +26,3 @@ public class sõnaValija {
         return sõnaJaTähendus;
     } //sõnaValija
 }//class
-
